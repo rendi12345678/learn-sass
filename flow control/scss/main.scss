@@ -1,0 +1,117 @@
+body {
+  min-height: 1000px;
+}
+
+// if
+@mixin profile-pic($size, $circle: false) {
+  width: $size;
+  height: $size;
+  border: 5px solid #fff;
+  box-shadow: 1px 1px 3px rgba($color: #000, $alpha: 0.3);
+
+  @if $circle {
+    border-radius: 50%;
+  }
+}
+
+.square-profile {
+  @include profile-pic(200px, $circle: false);
+}
+
+.circle-profile {
+  @include profile-pic(200px, $circle: true);
+}
+
+// else
+$light-bg: #eaeaea;
+$light-text: #333;
+$dark-bg: #999;
+$dark-text: #ddd;
+
+@mixin color-mode($light-mode: true) {
+  @if ($light-mode) {
+    background: $light-bg;
+    color: $light-text;
+  } @else {
+    background: $dark-bg;
+    color: $dark-text;
+  }
+}
+
+.nav {
+  @include color-mode($light-mode: false);
+}
+
+// else
+@mixin triangle($size, $color, $direction) {
+  width: 0;
+  height: 0;
+  background-color: transparent;
+  border-color: transparent;
+  border-style: solid;
+  border-width: $size / 2;
+  @if $direction == up {
+    border-bottom-color: $color;
+  } @else if $direction == right {
+    border-left-color: $color;
+  } @else if $direction == down {
+    border-top-color: $color;
+  } @else {
+    border-right-color: $color;
+  }
+}
+
+.right {
+  @include triangle(2em, black, right);
+}
+
+// for
+// .gradient {
+//   margin: 0;
+//   padding: 0;
+//   list-style: none;
+//   @for $index from 1 to 11 {
+//     li:nth-child(#{$index}) {
+//       padding: 4px;
+//       background-color: darken(salmon, $index * 2%);
+//     }
+//   }
+// }
+
+$color: rgb(255, 213, 0);
+
+// while
+.gradient {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  $index: 1;
+  @while $index < 11 {
+    li:nth-child(#{$index}) {
+      padding: 4px;
+      background-color: darken($color, $index * 2%);
+    }
+
+    $index: $index + 1;
+  }
+}
+
+// each
+$social-colors: (
+  youtube: red,
+  facebook: blue,
+  twitter: green,
+  instagram: salmon,
+  twitch: brown,
+);
+
+.socials {
+  font-size: 2em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  @each $social, $color in $social-colors {
+    .#{$social} {
+      color: $color;
+    }
+  }
+}

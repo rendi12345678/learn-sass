@@ -1,0 +1,36 @@
+// $secondary-color: green;
+// $text-color: salmon;
+// $primary-color: blue;
+
+// body {
+//   $primary-color: red;
+
+//   h1 {
+//     background: $secondary-color;
+//     color: $primary-color;
+//   }
+// }
+
+// p {
+//   color: $primary-color;
+// }
+
+// Map
+// $alert-danger: red;
+// $alert-success: green;
+// $alert-warning: orange;
+
+$alert: (
+  "danger": red,
+  "success": green,
+  "warning": orange,
+);
+
+h1 {
+  color: map-get($alert, "danger");
+}
+
+p {
+  color: map-get($alert, "warning");
+}
+
